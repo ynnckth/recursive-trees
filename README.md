@@ -1,11 +1,7 @@
 # recursive-trees
 
-Random trees that are drawn recursively in JavaScript with the P5JS library.
+Random trees drawn with recursion in JavaScript with p5js.
 
 Example:
 
-![Alt text](screenshots/tree_1.png?raw=true =250x)
-
-
-**License**
-MIT
+<img src="https://github.com/ynnckth/recursive-trees/raw/master/screenshots/tree_1.png" width="300">
