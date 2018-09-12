@@ -23,22 +23,22 @@ class Tree {
 		this.startPos = createVector(CANVAS_WIDTH/2, CANVAS_HEIGHT);
     }
 
-	sprout(startPos = this.startPos, angle = CENTER_ANGLE, branchLength = START_BRANCH_LENGTH, branchWeight = START_BRANCH_WEIGHT, currentIteration = TREE_DEPTH) {
-        if (currentIteration < 1) {
+	sprout(startPos = this.startPos, angle = CENTER_ANGLE, branchLength = START_BRANCH_LENGTH, branchWeight = START_BRANCH_WEIGHT, currentIteration = 0) {
+        if (currentIteration > TREE_DEPTH) {
             return;
         }
 
 	    let endPos = Helpers.calculatePosition(startPos, angle, branchLength);
-        let branchColor = currentIteration <= 1 ? COLOR_GREEN : COLOR_BROWN;
+        let branchColor = currentIteration >= TREE_DEPTH ? COLOR_GREEN : COLOR_BROWN;
 
-        this.branches.push(new Branch(startPos, endPos, branchWeight, branchColor));
+        this.branches.push(new Branch(startPos, endPos, branchWeight, branchColor, currentIteration));
 
         // left branch
         this.sprout(endPos,
             angle + Helpers.random(-MAX_BRANCH_ANGLE, 0),
             branchLength * Helpers.random(MIN_BRANCH_LENGTH, MAX_BRANCH_LENGTH),
             branchWeight * BRANCH_WEIGHT,
-            currentIteration - 1);
+            currentIteration + 1);
 
 
         // right branch
@@ -46,7 +46,7 @@ class Tree {
             angle + Helpers.random(0, MAX_BRANCH_ANGLE),
             branchLength * Helpers.random(MIN_BRANCH_LENGTH, MAX_BRANCH_LENGTH),
             branchWeight * BRANCH_WEIGHT,
-            currentIteration - 1);
+            currentIteration + 1);
 
         // and some more random branches...
         for (let i = 0; i < MAX_ADDITIONAL_NUM_BRANCHES; i++) {
@@ -55,12 +55,14 @@ class Tree {
                     angle + Helpers.random(-MAX_BRANCH_ANGLE, MAX_BRANCH_ANGLE),
                     branchLength * Helpers.random(MIN_BRANCH_LENGTH, MAX_BRANCH_LENGTH),
                     branchWeight * BRANCH_WEIGHT,
-                    currentIteration - 1);
+                    currentIteration + 1);
             }
         }
 	}
 
-	display() {
-		this.branches.forEach(branch => branch.display());
+	display(depth = TREE_DEPTH) {
+	    this.branches
+            .filter(branch => branch.recursionDepth <= depth)
+            .forEach(branch => branch.display());
 	}
 }

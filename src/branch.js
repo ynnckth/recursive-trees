@@ -1,11 +1,12 @@
 
 class Branch {
 
-    constructor(startpos, endpos, weight, color) {
+    constructor(startpos, endpos, weight, color, recursionDepth) {
         this.startpos = startpos;
         this.endpos = endpos;
         this.weight = weight;
         this.color = color;
+        this.recursionDepth = recursionDepth;
     }
 
     display() {
