@@ -1,6 +1,6 @@
 # recursive-trees
 
-Random trees drawn with recursion in JavaScript with p5js.
+Random trees drawn with recursion in JavaScript with p5js.  
 Check it out at: https://ynnckth.github.io/recursive-trees
 
 Example:
